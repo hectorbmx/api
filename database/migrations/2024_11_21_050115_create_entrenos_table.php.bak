@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('entrenos', function (Blueprint $table) {
+            $table->id(); // Llave primaria
+            $table->date('fecha'); // Fecha del entreno
+            $table->string('titulo'); // Título del entreno
+            $table->text('seccion1')->nullable(); // Descripción del entreno
+            $table->text('seccion2')->nullable(); // Descripción del entreno
+            $table->text('seccion3')->nullable(); // Descripción del entreno          
+            $table->text('seccion4')->nullable(); // Descripción del entreno          
+            $table->foreignId('usuario_id')->nullable()->constrained('users')->onDelete('set null'); // Relación con usuarios
+            $table->timestamps(); // Campos created_at y updated_at
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('entrenos');
+    }
+};
